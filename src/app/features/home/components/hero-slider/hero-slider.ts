@@ -64,6 +64,10 @@ export class HeroSlider implements OnInit, OnDestroy {
   }
 
   getTransform() {
-    return `translateX(-${this.currentIndex() * 100}%)`;
+    // Calculate offset to center the active slide and show adjacent slides
+    // Each slide is 70% width, so we need to offset by 15% to center it
+    const slideWidth = 70; // percentage
+    const offset = this.currentIndex() * slideWidth;
+    return `translateX(calc(15% - ${offset}%))`;
   }
 }
