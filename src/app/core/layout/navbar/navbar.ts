@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class Navbar {
   isLoginModalOpen = signal(false);
   isSignupModalOpen = signal(false);
+  isLanguageModalOpen = signal(false);
   
   // Login form
   username = '';
@@ -21,6 +22,20 @@ export class Navbar {
   signupUsername = '';
   signupPassword = '';
   signupPhone = '';
+
+  // Language and Currency options
+  languages = [
+    { code: 'VND', flag: '🇻🇳', name: 'Tiếng Việt', language: 'English' },
+    { code: 'INR', flag: '🇮🇳', name: '₹ INR', language: 'English' },
+    { code: 'BDT', flag: '🇧🇩', name: '৳ BDT', language: 'বাংলা', languageAlt: 'English' },
+    { code: 'THB', flag: '🇹🇭', name: '฿ THB', language: 'ไทย', languageAlt: 'English' },
+    { code: 'PHP', flag: '🇵🇭', name: '₱ PHP', language: 'English', languageAlt: 'Tagalog' },
+    { code: 'MMK', flag: '🇲🇲', name: 'Ks MMK', language: 'ဗမာ', languageAlt: 'English' },
+    { code: 'PKR', flag: '🇵🇰', name: 'Rs PKR', language: 'English' },
+    { code: 'NPR', flag: '🇳🇵', name: 'रु NPR', language: 'नेपाली', languageAlt: 'English' },
+  ];
+
+  selectedLanguage = this.languages[2]; // Default to BDT
 
   openLoginModal() {
     this.isLoginModalOpen.set(true);
@@ -36,6 +51,19 @@ export class Navbar {
 
   closeSignupModal() {
     this.isSignupModalOpen.set(false);
+  }
+
+  openLanguageModal() {
+    this.isLanguageModalOpen.set(true);
+  }
+
+  closeLanguageModal() {
+    this.isLanguageModalOpen.set(false);
+  }
+
+  selectLanguage(lang: any) {
+    this.selectedLanguage = lang;
+    this.closeLanguageModal();
   }
 
   onLogin() {

@@ -21,7 +21,9 @@
         </div>
       </div>
       <div>
-        <img src="assets/images/bd.webp" class="w-8" alt="" />
+        <button (click)="openLanguageModal()" class="hover:opacity-80 transition-opacity">
+          <img src="assets/images/bd.webp" class="w-8" alt="Language" />
+        </button>
       </div>
     </div>
   </div>
@@ -277,6 +279,59 @@
           <a href="#" (click)="closeSignupModal(); openLoginModal(); $event.preventDefault()" class="text-yellow-600 hover:text-yellow-700 font-medium ml-1">Login</a>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Language and Currency Modal -->
+<div 
+  *ngIf="isLanguageModalOpen()"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+  (click)="closeLanguageModal()">
+  <div 
+    class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 relative"
+    (click)="$event.stopPropagation()">
+    
+    <!-- Close Button -->
+    <button 
+      (click)="closeLanguageModal()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Modal Content -->
+    <div class="p-8">
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <h2 class="text-xl font-bold text-gray-900">Currency and Language</h2>
+      </div>
+
+      <!-- Language Grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <button
+          *ngFor="let lang of languages"
+          (click)="selectLanguage(lang)"
+          class="border-2 rounded-xl p-4 hover:border-yellow-400 transition-all duration-200 hover:shadow-md"
+          [class.border-yellow-400]="selectedLanguage.code === lang.code"
+          [class.border-gray-200]="selectedLanguage.code !== lang.code">
+          <div class="flex flex-col items-center">
+            <!-- Flag -->
+            <div class="text-4xl mb-2">{{ lang.flag }}</div>
+            
+            <!-- Currency -->
+            <div class="font-bold text-gray-900 mb-2">{{ lang.name }}</div>
+            
+            <!-- Languages -->
+            <div class="flex flex-col items-center gap-1 text-sm">
+              <div class="text-gray-600">{{ lang.language }}</div>
+              <div *ngIf="lang.languageAlt" class="text-gray-600">{{ lang.languageAlt }}</div>
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </div>
